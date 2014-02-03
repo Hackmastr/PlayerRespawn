@@ -1,0 +1,19 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"1.0.0"
+		}
+		
+		"Notes"	"Release"
+	}
+	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/playerrespawn.smx"
+		"Plugin"	"Path_SM/translations/playerrespawn.phrases.txt"
+		"Source"	"Path_SM/scripting/playerrespawn.sp"
+	}
+}
