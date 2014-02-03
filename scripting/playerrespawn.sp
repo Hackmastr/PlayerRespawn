@@ -1,7 +1,6 @@
 #pragma semicolon 1
 
 #include <sourcemod>
-#include <sdktools>
 #include <autoexecconfig>
 
 #undef REQUIRE_PLUGIN
@@ -10,9 +9,10 @@
 #undef REQUIRE_EXTENSIONS
 #include <cstrike>
 #include <tf2>
+#include <dodhooks>
 #define REQUIRE_EXTENSIONS
 
-#define RESPAWN_VERSION "1.0.0"
+#define RESPAWN_VERSION "1.1.0"
 
 #define UPDATE_URL    "http://update.bara.in/playerrespawn.txt"
 
@@ -90,7 +90,7 @@ public Action:Command_Respawn(client, args)
 				if(GetConVarInt(g_hRespawnCount) != g_iRespawnCount[client])
 				{
 					g_iRespawnCount[client]++;
-					RespawnPlayer(client);
+					Respawn_Player(client);
 				}
 				else
 				{
@@ -99,7 +99,7 @@ public Action:Command_Respawn(client, args)
 			}
 			else
 			{
-				RespawnPlayer(client);
+				Respawn_Player(client);
 			}
 		}
 		else
@@ -109,7 +109,7 @@ public Action:Command_Respawn(client, args)
 	}
 }
 
-stock RespawnPlayer(client)
+stock Respawn_Player(client)
 {
 	if(GetEngineVersion() == Engine_CSS || GetEngineVersion() == Engine_CSGO)
 	{
@@ -119,6 +119,11 @@ stock RespawnPlayer(client)
 	else if(GetEngineVersion() == Engine_TF2)
 	{
 		TF2_RespawnPlayer(client);
+		PrintToChatAll("%t", "PlayerSpawned", client);
+	}
+	else if(GetEngineVersion() == Engine_DODS)
+	{
+		RespawnPlayer(client, true);
 		PrintToChatAll("%t", "PlayerSpawned", client);
 	}
 }
