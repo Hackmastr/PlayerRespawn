@@ -12,7 +12,7 @@
 #include <dodhooks>
 #define REQUIRE_EXTENSIONS
 
-#define RESPAWN_VERSION "1.1.0"
+#define RESPAWN_VERSION "1.1.1"
 
 #define UPDATE_URL    "http://update.bara.in/playerrespawn.txt"
 
@@ -33,6 +33,18 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
+	if(GetEngineVersion() == Engine_DODS)
+	{
+		if (GetExtensionFileStatus("dodhooks.ext") != 1)
+		{
+			SetFailState("Cant found the extensions DODHOOKS!");
+		}
+	}
+	else if(GetEngineVersion() != Engine_CSS && GetEngineVersion() != Engine_CSGO && GetEngineVersion() != Engine_TF2)
+	{
+		SetFailState("Only CSS, CSGO, TF2 Support and DODS with DODHOOKS");
+	}
+
 	LoadTranslations("playerrespawn.phrases");
 
 	CreateConVar("playerrespawn_version", RESPAWN_VERSION, "Player Respawn", FCVAR_NOTIFY|FCVAR_DONTRECORD);
@@ -51,10 +63,10 @@ public OnPluginStart()
 
 	HookEvent("round_end", Event_RoundEnd);
 
-	if (LibraryExists("updater"))
+	if(LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
-	}
+	}	
 }
 
 public OnLibraryAdded(const String:name[])
