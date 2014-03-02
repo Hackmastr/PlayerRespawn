@@ -12,13 +12,14 @@
 #include <dodhooks>
 #define REQUIRE_EXTENSIONS
 
-#define RESPAWN_VERSION "1.1.1"
+#define RESPAWN_VERSION "1.1.2"
 
 #define UPDATE_URL    "http://update.bara.in/playerrespawn.txt"
 
-new Handle:g_HEnablePlugin = INVALID_HANDLE;
+new Handle:g_hEnablePlugin = INVALID_HANDLE;
 new Handle:g_hEnableCount = INVALID_HANDLE;
 new Handle:g_hRespawnCount = INVALID_HANDLE;
+new Handle:g_hEnableMessage = INVALID_HANDLE;
 
 new g_iRespawnCount[MAXPLAYERS+1] = 0;
 
@@ -52,7 +53,8 @@ public OnPluginStart()
 	AutoExecConfig_SetFile("plugin.playerrespawn", "sourcemod");
 	AutoExecConfig_SetCreateFile(true);
 
-	g_HEnablePlugin = AutoExecConfig_CreateConVar("respawn_enable", "1", "Enable / Disable this Player Respawn Plugin", _, true, 0.0, true, 1.0);
+	g_hEnablePlugin = AutoExecConfig_CreateConVar("respawn_enable", "1", "Enable / Disable this Player Respawn Plugin", _, true, 0.0, true, 1.0);
+	g_hEnableMessage = AutoExecConfig_CreateConVar("respawn_message", "1", "Enable / Disable Chat Message when Player use !respawn", _, true, 0.0, true, 1.0);
 	g_hEnableCount = AutoExecConfig_CreateConVar("respawn_enable_count", "1", "Enable / Disable certain number of Respawn per Round", _, true, 0.0, true, 1.0);
 	g_hRespawnCount = AutoExecConfig_CreateConVar("respawn_count", "2", "How many respawn Count per Round?");
 
@@ -79,7 +81,7 @@ public OnLibraryAdded(const String:name[])
 
 public Event_RoundEnd(Handle:event,const String:name[],bool:dontBroadcast)
 {
-	if(GetConVarInt(g_HEnablePlugin))
+	if(GetConVarInt(g_hEnablePlugin))
 	{
 		for(new i = 1; i <= MaxClients; i++)
 		{
@@ -93,7 +95,7 @@ public Event_RoundEnd(Handle:event,const String:name[],bool:dontBroadcast)
 
 public Action:Command_Respawn(client, args)
 {
-	if(GetConVarInt(g_HEnablePlugin))
+	if(GetConVarInt(g_hEnablePlugin))
 	{
 		if(!IsPlayerAlive(client))
 		{
@@ -126,17 +128,29 @@ stock Respawn_Player(client)
 	if(GetEngineVersion() == Engine_CSS || GetEngineVersion() == Engine_CSGO)
 	{
 		CS_RespawnPlayer(client);
-		PrintToChatAll("%t", "PlayerSpawned", client);
+
+		if(GetConVarInt(g_hEnableMessage))
+		{
+			PrintToChatAll("%t", "PlayerSpawned", client);
+		}
 	}
 	else if(GetEngineVersion() == Engine_TF2)
 	{
 		TF2_RespawnPlayer(client);
-		PrintToChatAll("%t", "PlayerSpawned", client);
+
+		if(GetConVarInt(g_hEnableMessage))
+		{
+			PrintToChatAll("%t", "PlayerSpawned", client);
+		}
 	}
 	else if(GetEngineVersion() == Engine_DODS)
 	{
 		RespawnPlayer(client, true);
-		PrintToChatAll("%t", "PlayerSpawned", client);
+
+		if(GetConVarInt(g_hEnableMessage))
+		{
+			PrintToChatAll("%t", "PlayerSpawned", client);
+		}
 	}
 }
 
