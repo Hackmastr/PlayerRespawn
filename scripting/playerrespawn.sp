@@ -12,9 +12,9 @@
 #include <dodhooks>
 #define REQUIRE_EXTENSIONS
 
-#define RESPAWN_VERSION "1.1.2"
+#define RESPAWN_VERSION "1.1.3"
 
-#define UPDATE_URL    "http://update.bara.in/playerrespawn.txt"
+#define UPDATE_URL    "https://bara.in/update/playerrespawn.txt"
 
 new Handle:g_hEnablePlugin = INVALID_HANDLE;
 new Handle:g_hEnableCount = INVALID_HANDLE;
