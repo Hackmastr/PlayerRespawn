@@ -1,0 +1,21 @@
+"Phrases"
+{
+	"PlayerAlive"
+	{
+		"en"		"Error: You live already!"
+		"de"		"Fehler: Sie leben bereits!"
+	}
+	
+	"RespawnReached"
+	{
+		"en"		"Error: Maximum Count reached!"
+		"de"		"Fehler: Maximale Anzahl erreicht!"
+	}
+	
+	"PlayerSpawned"
+	{
+		"#format"	"{1:N}"
+		"en"		"Player: {1} has revived itself!
+		"de"		"Spieler: {1} hat sich wiederbelebt!"
+	}
+}
