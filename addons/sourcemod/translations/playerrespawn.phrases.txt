@@ -4,12 +4,14 @@
 	{
 		"en"		"Error: You live already!"
 		"de"		"Fehler: Sie leben bereits!"
+		"ru"		"Ошибка: Вы уже живы!"
 	}
 	
 	"RespawnReached"
 	{
 		"en"		"Error: Maximum Count reached!"
 		"de"		"Fehler: Maximale Anzahl erreicht!"
+		"ru"		"Ошибка: Максимальный количество достигнуто!"
 	}
 	
 	"PlayerSpawned"
@@ -17,5 +19,6 @@
 		"#format"	"{1:N}"
 		"en"		"Player: {1} has revived itself!
 		"de"		"Spieler: {1} hat sich wiederbelebt!"
+		"ru"		"Игрок: {1} воскресил себя!
 	}
 }
