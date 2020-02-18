@@ -11,7 +11,7 @@
 	{
 		"en"		"Error: Maximum Count reached!"
 		"de"		"Fehler: Maximale Anzahl erreicht!"
-		"ru"		"Ошибка: Максимальный количество достигнуто!"
+		"ru"		"Ошибка: Максимальное количество достигнуто!"
 	}
 	
 	"PlayerSpawned"
